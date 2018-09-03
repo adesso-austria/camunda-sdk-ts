@@ -1,0 +1,29 @@
+{
+  "name": "camunda-sdk-ts",
+  "version": "0.0.1",
+  "description": "Camunda SDK for typescript projects",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf -r dist/",
+    "build": "npm run clean && tsc",
+    "lint": "tslint 'src/**/*.ts'",
+    "test": "ts-node node_modules/jasmine/bin/jasmine ./src/**/*.spec.ts"
+  },
+  "author": "Michael Vlasaty",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^6.2.2"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/jasmine": "^2.8.8",
+    "jasmine": "^3.2.0",
+    "prettier": "^1.14.2",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  }
+}
