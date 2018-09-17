@@ -1,77 +1,61 @@
-/**
- * Permitted query operator
- */
-export type QueryOperator = 'eq' | 'neq' | 'gt' | 'gteq' | 'lt' | 'lteq' | 'like';
+export interface QueryParams {
+  firstResult: number;
+  maxResults: number;
+}
 
-/**
- * Permitted sort order
- */
-export type SortOrder = 'asc' | 'desc';
-
-/**
- * Valid process instance state
- */
-export type ProcessInstanceState =
-  | 'ACTIVE'
-  | 'SUSPENDED'
-  | 'COMPLETED'
-  | 'EXTERNALLY_TERMINATED'
-  | 'INTERNALLY_TERMINATED';
-
-/**
- * Added to responses as result count
- */
 export interface Countable {
   count: number;
 }
 
-/**
- * Meta information for object values
- */
 export interface ValueInfo {
   objectTypeName: string;
   serializationDataFormat: string;
 }
 
 /**
- * DTO for variable values
+ * Representation of a variable instance.
+ * Supply a Key and a Lookuptype for strong typings.
  */
-export interface ObjectValue<T = string | number | boolean | Object> {
-  name: string;
-  value: T;
+export interface ObjectValue<K extends keyof L = any, L = any> {
+  name: K;
+  value: L[K];
   type: string;
-  valueInfo: ValueInfo;
+  /**
+   * Has to be set if type is not a primitive
+   */
+  valueInfo?: ValueInfo;
 }
 
-/**
- * Object to query for certain variable states
- */
+export type QueryOperator = 'eq' | 'neq' | 'gt' | 'gteq' | 'lt' | 'lteq' | 'like';
 export interface VariableCriteria {
   name: string;
   operator: QueryOperator;
   value: string | number | boolean;
 }
 
-/**
- * Sets sort by and sort order
- */
-export interface SortingCriteria<B, P = never> {
+export type SortOrder = 'asc' | 'desc';
+export interface SortingCriteria<B, P> {
   sortBy: B;
   sortOrder: SortOrder;
   parameters?: P;
 }
 
-/**
- * Object for result pagination
- */
-export interface QueryParams {
-  firstResult: number;
-  maxResults: number;
+// TODO: refactor to proper place
+export interface VariableQuery {
+  variableName?: string;
+  variableNameLike?: string;
+  processInstanceIdIn?: string[];
+  executionIdIn?: string[];
+  caseInstanceId?: string;
+  caseExecutionIdIn?: string[];
+  taskIdIn?: string[];
+  activityInstanceIdIn?: string[];
+  tenantIdIn?: string[];
 }
 
-/**
- * Base class for all queries
- */
-export interface SortableQuery<B, P = never> {
-  sorting?: SortingCriteria<B, P>[];
-}
+export type ProcessInstanceState =
+  | 'ACTIVE'
+  | 'SUSPENDED'
+  | 'COMPLETED'
+  | 'EXTERNALLY_TERMINATED'
+  | 'INTERNALLY_TERMINATED';
