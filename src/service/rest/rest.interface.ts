@@ -59,3 +59,6 @@ export type ProcessInstanceState =
   | 'COMPLETED'
   | 'EXTERNALLY_TERMINATED'
   | 'INTERNALLY_TERMINATED';
+
+export type IncidentType = 'failedJob' | 'failedExternalTask';
+export type IncidentStatus = 'open' | 'resolved';
