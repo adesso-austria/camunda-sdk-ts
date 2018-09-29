@@ -1,27 +1,57 @@
 import 'jasmine';
-import { connect } from '../rest/connector';
-import { TaskQuery } from './task.interface';
-import { TaskService as Task, ITaskService } from './task.service';
-import { Countable } from '../rest/rest.interface';
-import { Observable } from 'rxjs';
-
-
-// const connector: ConnectorFn<Countable, TaskQuery, QueryParams> = connect;
-class TaskService implements ITaskService {
-  executeTaskQueryCount(query: TaskQuery): Observable<Countable> | Promise<Countable> {
-    return connect('POST', Task.executeTaskQueryCount)(query);
-  }
-}
+import { Observable, Observer } from 'rxjs';
+import { RequestOptions } from '../rest/rest.client';
+import { TaskService } from './task.service';
+// class TaskServiceImpl implements ITaskService {
+//   public executeTaskQueryCount(data: RequestObject<TaskQuery, never>): Observable<Countable> {
+//     return connectedFn(Task.executeTaskQueryCount)(data);
+//   }
+//   public executeTaskQuery(data: RequestObject<TaskQuery>): Observable<TaskInstance[]> {
+//     return connectedFn(Task.executeTaskQuery)(data);
+//   }
+// }
 
 describe('Task Service', () => {
-  describe('Factory', () => {
-    fit('should return a task service', () => {
+  xdescribe('executeTaskQueryCount', () => {
+    // fit('should return a task service', () => {
+    //   connectorConfig.clientFn = <RS>(url: string, options?: any) => {
+    //     console.log("OVERRIDING CLIENT FN!!!", url, options);
+    //     return of({} as RS);
+    //   }
+    //   const taskService = new TaskServiceImpl();
+    //   taskService.executeTaskQueryCount({request: {}});
+    //   taskService.executeTaskQuery({ request: {}, params: {firstResult: 23, maxResults: 1}});
+    // });
+  });
+  xdescribe('executeTaskQuery', () => {
+    it('should return a task service', () => {
+    });
+  });
+  describe('complete', () => {
+    it('should call the service endpoint', () => {
       // Given
-      // const taskService = taskServiceFactory(mockRestClient as RestClient);
-      const taskService = new TaskService();
-      taskService.executeTaskQueryCount({});
+      const complete = TaskService.complete;
+
+      function mockClientFn<T>(url: string, options?: RequestOptions){
+        return Observable.create((observer: Observer<T>) => {
+          observer.next({url, options} as any);
+          observer.complete();
+        });
+      }
+      const mock = jasmine.createSpy('clientFn', mockClientFn);
+      // When
+      complete(mock, {
+        request: {
+          id: 'mockId',
+          data: {
+            variables: { },
+          },
+        },
+      });
+
       // Then
-      // expect(taskService).toBeTruthy();
+      expect(mock).toHaveBeenCalled();
+      expect(mock).toHaveBeenCalledWith('/task/mockId/complete', {method: 'POST', body: {variables: { }}});
     });
   });
 });

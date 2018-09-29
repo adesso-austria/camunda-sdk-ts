@@ -15,7 +15,8 @@ export class IdentityService {
 
   public verify(username: string, password: string) {
     const options: RequestOptions = {
-      body: JSON.stringify({username, password}),
+      body: {username, password},
+      method: 'POST',
       // headers,
     };
     return this.client.post<VerificationResult>(`${this.endpointPrefix}/verify`, options);

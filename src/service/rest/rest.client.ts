@@ -11,14 +11,15 @@ export interface RestClient {
 }
 
 export interface RequestOptions {
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   authToken?: string;
   tenant?: string;
   headers?: Header[];
   body?: any;
 }
-export type KeyMap<K extends string> = {
-  [key in K]?: string;
-}
+// export type KeyMap<K extends string> = {
+//   [key in K]?: string;
+// }
 
 export const defaultJsonHeaders = {
   "Content-Type": "application/json",

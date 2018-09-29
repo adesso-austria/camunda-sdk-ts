@@ -6,7 +6,7 @@ import { RestClient } from './rest.client';
  * Basic test for the restClient interface.
  * Describes how to implement a rest client for use with this library.
  */
-describe('Rest Client', () => {
+xdescribe('Rest Client', () => {
   describe('with Promise', () => {
     it('should return a Promise of given type', () => {
       // Given

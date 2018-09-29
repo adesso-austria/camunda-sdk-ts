@@ -1,4 +1,4 @@
-import { SortingCriteria, VariableCriteria } from '../rest/rest.interface';
+import { SortingCriteria, VariableCriteria, ValueInfo } from '../rest/rest.interface';
 
 export type TaskSortKey =
   | 'instanceId'
@@ -124,4 +124,28 @@ export interface TaskInstance {
   suspended: boolean;
   formKey: string;
   tenantId: string;
+}
+
+
+export interface VariableValue<K extends keyof T, T = any> {
+  value: T[K];
+  type?: string;
+  /**
+   * Has to be set if type is not a primitive
+   */
+  valueInfo?: ValueInfo;
+}
+export type PartialProcessVariable<T = any> = { [K in keyof T]?: VariableValue<K> };
+export interface VariableUpdate {
+  variables: PartialProcessVariable;
+}
+
+export interface VariableModification<T = any> {
+  modifications?: PartialProcessVariable;
+  deletions?: (keyof T)[];
+}
+
+export interface InstanceOperation<T> {
+  id: string;
+  data: T;
 }
