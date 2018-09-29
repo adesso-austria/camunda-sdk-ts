@@ -14,9 +14,8 @@
   "author": "Michael Vlasaty",
   "license": "MIT",
   "dependencies": {
-    "rxjs": "^6.2.2"
+    "rxjs": "^5.5.2"
   },
-  "peerDependencies": {},
   "devDependencies": {
     "@types/jasmine": "^2.8.8",
     "jasmine": "^3.2.0",
