@@ -10,19 +10,19 @@ export interface ITaskService {
   getTasksCountPost(data: RequestObject<TaskQuery, never>): Observable<Countable>;
   getTasksPost(data: RequestObject<TaskQuery>): Observable<TaskInstance[]>;
   complete(data: RequestObject<InstanceOperation<VariableUpdate>, never>): Observable<never>;
-  setAssignee(data: RequestObject<InstanceOperation<string>, never>);
+  setAssignee(data: RequestObject<InstanceOperation<string>, never>): any;
   
-  getFormKey(data: RequestObject<string, never>);
-  claim(data: RequestObject<string, never>);
-  unclaim(data: RequestObject<string, never>);
-  submitForm(data: RequestObject<TaskQuery, never>);
-  resolve(data: RequestObject<string, never>);
-  delegate(data: RequestObject<TaskQuery, never>);
-  getDeployedForm(data: RequestObject<string, never>);
-  getRenderedForm(data: RequestObject<string, never>);
-  getTaskFormVariables(data: RequestObject<string, never>);
-  create(data: RequestObject<TaskInstance, never>);
-  update(data: RequestObject<TaskQuery, never>);
+  getFormKey(data: RequestObject<string, never>): any;
+  claim(data: RequestObject<string, never>): any;
+  unclaim(data: RequestObject<string, never>): any;
+  submitForm(data: RequestObject<TaskQuery, never>): any;
+  resolve(data: RequestObject<string, never>): any;
+  delegate(data: RequestObject<TaskQuery, never>): any;
+  getDeployedForm(data: RequestObject<string, never>): any;
+  getRenderedForm(data: RequestObject<string, never>): any;
+  getTaskFormVariables(data: RequestObject<string, never>): any;
+  create(data: RequestObject<TaskInstance, never>): any;
+  update(data: RequestObject<TaskQuery, never>): any;
 }
 
 export namespace TaskService {
@@ -41,7 +41,6 @@ export namespace TaskService {
    */
   export function getTasksCountPost(clientFn: ClientFn<Countable>, data: RequestObject<TaskQuery, never>): Observable<Countable> {
     const url = endpointPrefix+'/count';
-    console.log("Counting",clientFn, data);
     return clientFn(url, {
       body: data.request,
       method: 'POST',

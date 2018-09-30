@@ -1,5 +1,6 @@
 import 'jasmine';
-import { Observable, of } from 'rxjs';
+import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
 import { RestClient } from './rest.client';
 
 /**
@@ -54,15 +55,15 @@ class MockClientPromise implements RestClient {
 class MockClientObservable implements RestClient {
   constructor(public returnValue: any) {}
   public get<T>() {
-    return of(this.returnValue as T);
+    return Observable.of(this.returnValue as T);
   }
   public post<T>() {
-    return of(this.returnValue as T);
+    return Observable.of(this.returnValue as T);
   }
   public put<T>() {
-    return of(this.returnValue as T);
+    return Observable.of(this.returnValue as T);
   }
   public delete<T>() {
-    return of(this.returnValue as T);
+    return Observable.of(this.returnValue as T);
   }
 }
