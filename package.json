@@ -18,12 +18,12 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@types/jasmine": "^2.8.8",
-    "jasmine": "^3.2.0",
-    "prettier": "^1.14.2",
-    "rimraf": "^2.6.2",
-    "ts-node": "^7.0.0",
-    "tslint": "^5.11.0",
-    "typescript": "^3.0.1"
+    "@types/jasmine": "^2.8.16",
+    "jasmine": "^3.5.0",
+    "prettier": "^1.18.2",
+    "rimraf": "^2.7.1",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.3"
   }
 }
